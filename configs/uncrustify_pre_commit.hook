@@ -7,10 +7,9 @@ THIS_DIR="$( dirname "${BASH_SOURCE[0]}" )"
 THIS_DIR="${THIS_DIR/\.git*/}"
 cd "${THIS_DIR}"
 
-REPO_ROOT="$(git rev-parse --show-toplevel)"
+REPO_ROOT="$(unset GIT_DIR; git rev-parse --show-toplevel)"
 
-#CONFIG_FILE="${REPO_ROOT}/tools/uncrustify/uncrustify_java.cfg"
-CONFIG_FILE="${REPO_ROOT}/tools/uncrustify/java.cfg"
+CONFIG_FILE="${REPO_ROOT}/tools/uncrustify/uncrustify_java.cfg"
 EXE_PATH="${REPO_ROOT}/tools/uncrustify/uncrustify"
 
 cd "${REPO_ROOT}"
@@ -19,6 +18,7 @@ cd "${REPO_ROOT}"
 while IFS= read -rd '' GIT_STATUS
 do
 	IFS= read -rd '' FILE_PATH
+# first of all, format all the files
 #for FILE_PATH in "${REPO_ROOT}"/source/code/package/*
 #do
 
